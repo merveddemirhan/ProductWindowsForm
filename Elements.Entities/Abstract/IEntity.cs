@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Elements.Entities
+namespace Elements.Entities.Abstract
 {
-    public class Class1
+    public interface IEntity
     {
     }
 }

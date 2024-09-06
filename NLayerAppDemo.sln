@@ -9,7 +9,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elements.DataAccess", "Elem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elements.Entities", "Elements.Entities\Elements.Entities.csproj", "{A814BFD7-8629-42E5-9D28-A4D58BAF4A76}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElementsWindowsFormUI", "ElementsWindowsFormUI\ElementsWindowsFormUI.csproj", "{DA08BE66-F85B-46DF-B655-AF7DD29BD147}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Elements.WebFormsUI", "Elements.WebFormsUI\Elements.WebFormsUI.csproj", "{68ED68A0-86F3-4DEE-B971-BE7ECA2661A9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -29,10 +29,10 @@ Global
 		{A814BFD7-8629-42E5-9D28-A4D58BAF4A76}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A814BFD7-8629-42E5-9D28-A4D58BAF4A76}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A814BFD7-8629-42E5-9D28-A4D58BAF4A76}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DA08BE66-F85B-46DF-B655-AF7DD29BD147}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DA08BE66-F85B-46DF-B655-AF7DD29BD147}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DA08BE66-F85B-46DF-B655-AF7DD29BD147}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DA08BE66-F85B-46DF-B655-AF7DD29BD147}.Release|Any CPU.Build.0 = Release|Any CPU
+		{68ED68A0-86F3-4DEE-B971-BE7ECA2661A9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{68ED68A0-86F3-4DEE-B971-BE7ECA2661A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{68ED68A0-86F3-4DEE-B971-BE7ECA2661A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{68ED68A0-86F3-4DEE-B971-BE7ECA2661A9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
