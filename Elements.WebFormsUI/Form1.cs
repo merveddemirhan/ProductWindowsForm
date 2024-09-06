@@ -20,13 +20,18 @@ namespace Elements.WebFormsUI
         public Form1()
         {
             InitializeComponent();
-            _productService = new ProductManager(new NhProductDal());
+            _productService = new ProductManager(new EfProductDal());
         }
         IProductService _productService;
         private void Form1_Load(object sender, EventArgs e)
         {
            
             dgwProduct.DataSource = _productService.GetAll();
+
+        }
+
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }
