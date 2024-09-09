@@ -3,6 +3,7 @@ using Elements.Business.Concrete;
 using Elements.DataAccess.Abstract;
 using Elements.DataAccess.Concrete.EntityFramework;
 using Elements.DataAccess.Concrete.NHibernate;
+using Elements.Entities.Concrete;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,6 +39,16 @@ namespace Elements.WebFormsUI
             cmbSearchWithCategory.DataSource = _categoryService.GetAll();
             cmbSearchWithCategory.DisplayMember = "CategoryName";
             cmbSearchWithCategory.ValueMember = "CategoryID";
+
+            cmxAddCategoryId.DataSource = _categoryService.GetAll();
+            cmxAddCategoryId.DisplayMember = "CategoryName";
+            cmxAddCategoryId.ValueMember = "CategoryID";
+
+            cmxUCategoryId.DataSource = _categoryService.GetAll();
+            cmxUCategoryId.DisplayMember = "CategoryName";
+            cmxUCategoryId.ValueMember = "CategoryID";
+
+
         }
 
         private void LoadProduct()
@@ -83,5 +94,67 @@ namespace Elements.WebFormsUI
             
         }
 
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            _productService.Add(new Product
+            {
+                ProductName=tbxAddProductName.Text,
+                CategoryID=Convert.ToInt32(cmxAddCategoryId.SelectedValue),
+                UnitPrice=Convert.ToDecimal(tbxAddUnitPrice.Text),
+                UnitsInStock=Convert.ToInt16(tbxAddUnitsInStock.Text),
+                QuantityPerUnit=tbxAddQuantityPerUnit.Text,
+            });
+            MessageBox.Show("Ürün Kaydedildi!");
+            LoadProduct();
+        }
+
+        private void dgwProduct_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            tbxUProductName.Text = Convert.ToString(dgwProduct.CurrentRow.Cells[1].Value);
+            cmxUCategoryId.SelectedValue = dgwProduct.CurrentRow.Cells[2].Value;
+            tbxUUnitPrice.Text=dgwProduct.CurrentRow.Cells[3].Value.ToString();
+            tbxUUnitInStock.Text = dgwProduct.CurrentRow.Cells[4].Value.ToString();
+            tbxUQuantityPerUnit.Text = dgwProduct.CurrentRow.Cells[5].Value.ToString();
+
+        }
+
+        private void btnUppdate_Click(object sender, EventArgs e)
+        {
+            _productService.Update(new Product 
+            { 
+                ProductID= Convert.ToInt32(dgwProduct.CurrentRow.Cells[0].Value),
+                CategoryID=Convert.ToInt32(cmxUCategoryId.SelectedValue),
+                ProductName=tbxUProductName.Text,
+                UnitPrice=Convert.ToDecimal(tbxUUnitPrice.Text),
+                UnitsInStock=Convert.ToInt16(tbxUUnitInStock.Text),
+                QuantityPerUnit=tbxUQuantityPerUnit.Text,
+
+
+            });
+            MessageBox.Show("ürün güncellendi");
+            LoadProduct();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if(dgwProduct.CurrentRow != null)
+            {
+                try
+                {
+                    _productService.Delete(new Product
+                    {
+                        ProductID = Convert.ToInt32(dgwProduct.CurrentRow.Cells[0].Value),
+                    });
+                    MessageBox.Show("ürün silindi!");
+                    LoadProduct();
+                }
+                catch (Exception exception)
+                {
+                    MessageBox.Show(exception.Message);
+                }
+            }
+
+
+        }
     }
 }
