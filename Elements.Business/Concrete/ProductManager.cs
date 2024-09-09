@@ -1,8 +1,11 @@
 ﻿using Elements.Business.Abstract;
+using Elements.Business.utilities;
+using Elements.Business.ValidationRules.FluentValidation;
 using Elements.DataAccess.Abstract;
 using Elements.DataAccess.Concrete;
 using Elements.DataAccess.Concrete.EntityFramework;
 using Elements.Entities.Concrete;
+
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Infrastructure;
@@ -22,6 +25,8 @@ namespace Elements.Business.Concrete
 
         public void Add(Product product)
         {
+            ValidationTool.Validate(new ProductValidator(), product);
+
             _productDal.Add(product);
         }
 
@@ -61,6 +66,7 @@ namespace Elements.Business.Concrete
 
         public void Update(Product product)
         {
+            ValidationTool.Validate(new ProductValidator(), product);
             _productDal.Update(product);
         }
     }

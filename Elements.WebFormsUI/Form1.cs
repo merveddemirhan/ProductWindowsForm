@@ -96,16 +96,24 @@ namespace Elements.WebFormsUI
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            _productService.Add(new Product
+            try
             {
-                ProductName=tbxAddProductName.Text,
-                CategoryID=Convert.ToInt32(cmxAddCategoryId.SelectedValue),
-                UnitPrice=Convert.ToDecimal(tbxAddUnitPrice.Text),
-                UnitsInStock=Convert.ToInt16(tbxAddUnitsInStock.Text),
-                QuantityPerUnit=tbxAddQuantityPerUnit.Text,
-            });
-            MessageBox.Show("Ürün Kaydedildi!");
-            LoadProduct();
+                _productService.Add(new Product
+                {
+                    ProductName = tbxAddProductName.Text,
+                    CategoryID = Convert.ToInt32(cmxAddCategoryId.SelectedValue),
+                    UnitPrice = Convert.ToDecimal(tbxAddUnitPrice.Text),
+                    UnitsInStock = Convert.ToInt16(tbxAddUnitsInStock.Text),
+                    QuantityPerUnit = tbxAddQuantityPerUnit.Text,
+                });
+                MessageBox.Show("Ürün Kaydedildi!");
+                LoadProduct();
+            }
+            catch (Exception exception)
+            { 
+                MessageBox.Show(exception.Message); 
+            }
+       
         }
 
         private void dgwProduct_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -120,19 +128,26 @@ namespace Elements.WebFormsUI
 
         private void btnUppdate_Click(object sender, EventArgs e)
         {
-            _productService.Update(new Product 
-            { 
-                ProductID= Convert.ToInt32(dgwProduct.CurrentRow.Cells[0].Value),
-                CategoryID=Convert.ToInt32(cmxUCategoryId.SelectedValue),
-                ProductName=tbxUProductName.Text,
-                UnitPrice=Convert.ToDecimal(tbxUUnitPrice.Text),
-                UnitsInStock=Convert.ToInt16(tbxUUnitInStock.Text),
-                QuantityPerUnit=tbxUQuantityPerUnit.Text,
+            try
+            {
+                _productService.Update(new Product
+                {
+                    ProductID = Convert.ToInt32(dgwProduct.CurrentRow.Cells[0].Value),
+                    CategoryID = Convert.ToInt32(cmxUCategoryId.SelectedValue),
+                    ProductName = tbxUProductName.Text,
+                    UnitPrice = Convert.ToDecimal(tbxUUnitPrice.Text),
+                    UnitsInStock = Convert.ToInt16(tbxUUnitInStock.Text),
+                    QuantityPerUnit = tbxUQuantityPerUnit.Text,
 
 
-            });
-            MessageBox.Show("ürün güncellendi");
-            LoadProduct();
+                });
+                MessageBox.Show("ürün güncellendi");
+                LoadProduct();
+            }catch(Exception exception) 
+            {
+                MessageBox.Show(exception.Message); 
+            }
+           
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
