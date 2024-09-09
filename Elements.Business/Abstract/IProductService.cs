@@ -10,5 +10,8 @@ namespace Elements.Business.Abstract
     public interface IProductService
     {
         List<Product> GetAll();
+        List<Product> GetProductByCategoryId(int categoryId);
+        List<Product> GetProductByProductName(string productName);
+        List<Product> GetProductByProductNameAndCatogryId(string productName, int categoryId);
     }
 }

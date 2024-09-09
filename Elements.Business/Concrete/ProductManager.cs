@@ -24,5 +24,19 @@ namespace Elements.Business.Concrete
             return _productDal.GetAll();
         }
 
+        public List<Product> GetProductByCategoryId(int categoryId)
+        {
+            return _productDal.GetAll(p => p.CategoryID == categoryId);
+        }
+
+        public List<Product> GetProductByProductName(string productName)
+        {
+            return _productDal.GetAll(p => p.ProductName.ToLower().Contains(productName.ToLower()));
+        }
+
+        public List<Product> GetProductByProductNameAndCatogryId(string productName, int categoryId)
+        {
+            return _productDal.GetAll(p => p.ProductName.ToLower().Contains(productName.ToLower()) && p.CategoryID==categoryId);
+        }
     }
 }

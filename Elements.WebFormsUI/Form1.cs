@@ -21,18 +21,67 @@ namespace Elements.WebFormsUI
         {
             InitializeComponent();
             _productService = new ProductManager(new EfProductDal());
+            _categoryService=new CategoryManager(new EfCategoryDal());
         }
         IProductService _productService;
+        ICategoryService _categoryService;
+
         private void Form1_Load(object sender, EventArgs e)
         {
-           
-            dgwProduct.DataSource = _productService.GetAll();
+            LoadProduct();
+            LoadCategory();
 
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void LoadCategory()
+        {
+            cmbSearchWithCategory.DataSource = _categoryService.GetAll();
+            cmbSearchWithCategory.DisplayMember = "CategoryName";
+            cmbSearchWithCategory.ValueMember = "CategoryID";
+        }
+
+        private void LoadProduct()
+        {
+            dgwProduct.DataSource = _productService.GetAll();
+        }
+
+
+        private void cmbSearchWithCategory_SelectedIndexChanged(object sender, EventArgs e)
+            
+        
+        {
+            try 
+            {
+                dgwProduct.DataSource = _productService.GetProductByCategoryId(Convert.ToInt32(cmbSearchWithCategory.SelectedValue));
+            }
+            catch 
+            {
+
+            }
+           
+        }
+
+        private void tbxSearhWithName_TextChanged(object sender, EventArgs e)
         {
 
+            if(cmbSearchWithCategory.SelectedValue !=null && String.IsNullOrEmpty(tbxSearhWithName.Text))
+            {
+                dgwProduct.DataSource = _productService.GetProductByCategoryId(Convert.ToInt32(cmbSearchWithCategory.SelectedValue));
+            }
+            if(cmbSearchWithCategory.SelectedValue==null && !String.IsNullOrEmpty(tbxSearhWithName.Text))
+            {
+                dgwProduct.DataSource = _productService.GetProductByProductName(tbxSearhWithName.Text);
+            }
+            if (String.IsNullOrEmpty(tbxSearhWithName.Text))
+            {
+                LoadProduct();
+            }
+            else
+            {
+                dgwProduct.DataSource=_productService.GetProductByProductNameAndCatogryId(tbxSearhWithName.Text, Convert.ToInt32(cmbSearchWithCategory.SelectedValue));
+            }
+            
         }
+
     }
 }
