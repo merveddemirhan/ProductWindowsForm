@@ -1,5 +1,6 @@
 ﻿using Elements.Business.Abstract;
 using Elements.Business.Concrete;
+using Elements.Business.DependencyResolves.Ninject;
 using Elements.DataAccess.Abstract;
 using Elements.DataAccess.Concrete.EntityFramework;
 using Elements.DataAccess.Concrete.NHibernate;
@@ -21,8 +22,8 @@ namespace Elements.WebFormsUI
         public Form1()
         {
             InitializeComponent();
-            _productService = new ProductManager(new EfProductDal());
-            _categoryService=new CategoryManager(new EfCategoryDal());
+            _productService = InstanceFactory.GetInstance<IProductService>();
+            _categoryService= InstanceFactory.GetInstance<ICategoryService>();
         }
         IProductService _productService;
         ICategoryService _categoryService;
