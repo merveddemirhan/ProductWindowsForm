@@ -1,4 +1,5 @@
-﻿using FluentValidation;
+﻿using Elements.Entities.Concrete;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,10 +10,10 @@ namespace Elements.Business.utilities
 {
     public static class ValidationTool
     {
-        public static void Validate(IValidator validator,object entity)
+        public static void Validate<T>(IValidator<T> validator, T entity)
         {
-            var result = validator.Validate((IValidationContext)entity);
-            if (result.Errors.Count>0)
+            var result = validator.Validate(entity); 
+            if (result.Errors.Count > 0)
             {
                 throw new ValidationException(result.Errors);
             }
